@@ -1,7 +1,6 @@
 package _00_mohayemin.ridesharing;
 
-public class Trip
-{
+public class Trip {
     private String rideType;
     private int dist;
     private int minutes;
@@ -10,19 +9,26 @@ public class Trip
     public Trip(String rideType,
                 int dist,
                 int minutes,
-                int noPass)
-    {
+                int noPass) {
         this.rideType = rideType;
         this.dist = dist;
         this.minutes = minutes;
         this.noPass = noPass;
     }
 
-    public int PerHeadFare()
-    {
+    public void requestTrip() {
+        if (canTakeTrip()) {
+            System.out.println(dist + " KM");
+            System.out.println(minutes + " Minutes");
+            System.out.println(perHeadFare() + " Taka Per Person");
+        } else {
+            System.out.println("Invalid Trip Request");
+        }
+    }
+
+    public int perHeadFare() {
         int fare = -1;
-        switch (rideType)
-        {
+        switch (rideType) {
             case "SEDAN":
                 fare = (50 + dist * 30 + minutes * 2) / noPass;
                 break;
@@ -41,13 +47,11 @@ public class Trip
         return fare - (fare % 5);
     }
 
-    public boolean CanTakeTrip()
-    {
+    public boolean canTakeTrip() {
         if (noPass < 1)
             return false;
 
-        switch (rideType)
-        {
+        switch (rideType) {
             case "SEDAN":
                 return noPass <= 4 && dist <= 25;
             case "SEVEN_SEATER":
