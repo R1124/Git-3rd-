@@ -17,6 +17,14 @@ public class Trip {
     }
 
     public void requestTrip() {
+        if (rideType == "MOTOR_BIKE") {
+            System.out.println("== Ride Swift in Bike ==");
+        } else if (rideType == "SEVEN_SEATER") {
+            System.out.println("== Ride with Friends and Family in Seven-Seater ==");
+        } else {
+            System.out.println("== Comfortable Sedan Ride ==");
+        }
+
         if (canTakeTrip()) {
             System.out.println(dist + " KM");
             System.out.println(minutes + " Minutes");
