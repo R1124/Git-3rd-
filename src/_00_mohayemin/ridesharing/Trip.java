@@ -18,11 +18,11 @@ public class Trip {
 
     public void requestTrip() {
         if (rideType == "MOTOR_BIKE") {
-            System.out.println("== Ride Swift in Bike ==");
+            System.out.println(new MotorBikeRide(numberOfPassengers, distanceInKm).getRideRequestMessage());
         } else if (rideType == "SEVEN_SEATER") {
-            System.out.println("== Ride with Friends and Family in Seven-Seater ==");
+            System.out.println(new SevenSeaterRide(numberOfPassengers, distanceInKm).getRideRequestMessage());
         } else {
-            System.out.println("== Comfortable Sedan Ride ==");
+            System.out.println(new SedanRide(numberOfPassengers, distanceInKm, timeInMinutes).getRideRequestMessage());
         }
 
         if (canTakeTrip()) {
@@ -85,6 +85,10 @@ class SedanRide {
     int calculateFare() {
         return (50 + distanceInKm * 30 + timeInMinutes * 2);
     }
+
+    String getRideRequestMessage(){
+        return "== Comfortable Sedan Ride ==";
+    }
 }
 
 class SevenSeaterRide {
@@ -106,6 +110,10 @@ class SevenSeaterRide {
         else
             return distanceInKm * 30;
     }
+
+    String getRideRequestMessage(){
+        return "== Ride with Friends and Family in Seven-Seater ==";
+    }
 }
 
 class MotorBikeRide {
@@ -123,5 +131,9 @@ class MotorBikeRide {
 
     int calculateFare(){
         return Math.max(25, distanceInKm * 20);
+    }
+
+    String getRideRequestMessage(){
+        return "== Ride Swift in Bike ==";
     }
 }
