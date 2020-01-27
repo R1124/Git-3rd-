@@ -38,20 +38,21 @@ public class Trip {
         int fare = -1;
         switch (rideType) {
             case "SEDAN":
-                fare = (50 + distanceInKm * 30 + timeInMinutes * 2) / numberOfPassengers;
+                fare = (50 + distanceInKm * 30 + timeInMinutes * 2);
                 break;
             case "MOTOR_BIKE":
-                fare = Math.max(25, distanceInKm * 20) / numberOfPassengers;
+                fare = Math.max(25, distanceInKm * 20);
                 break;
             default:
                 if (distanceInKm < 10)
-                    fare = 300 / numberOfPassengers;
+                    fare = 300;
                 else
-                    fare = (distanceInKm * 30) / numberOfPassengers;
+                    fare = (distanceInKm * 30);
 
                 break;
         }
 
+        fare /= numberOfPassengers;
         return fare - (fare % 5);
     }
 
@@ -69,4 +70,3 @@ public class Trip {
         }
     }
 }
-
