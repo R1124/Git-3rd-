@@ -62,11 +62,25 @@ public class Trip {
 
         switch (rideType) {
             case "SEDAN":
-                return numberOfPassengers <= 4 && distanceInKm <= 25;
+                return new SedanRide(numberOfPassengers, distanceInKm).canTakeTrip();
             case "SEVEN_SEATER":
                 return numberOfPassengers <= 7 && distanceInKm >= 10;
             default:
                 return numberOfPassengers <= 1 && distanceInKm <= 10;
         }
+    }
+}
+
+class SedanRide {
+    private int numberOfPassengers;
+    private int distanceInKm;
+
+    SedanRide(int numberOfPassengers, int distanceInKm) {
+        this.numberOfPassengers = numberOfPassengers;
+        this.distanceInKm = distanceInKm;
+    }
+
+    boolean canTakeTrip(){
+        return numberOfPassengers <= 4 && distanceInKm <= 25;
     }
 }
