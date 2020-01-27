@@ -38,17 +38,13 @@ public class Trip {
         int fare = -1;
         switch (rideType) {
             case "SEDAN":
-                fare = (50 + distanceInKm * 30 + timeInMinutes * 2);
+                fare = new SedanRide(numberOfPassengers, distanceInKm, timeInMinutes).calculateFare();
                 break;
             case "MOTOR_BIKE":
-                fare = Math.max(25, distanceInKm * 20);
+                fare = new MotorBikeRide(numberOfPassengers, distanceInKm).calculateFare();
                 break;
             default:
-                if (distanceInKm < 10)
-                    fare = 300;
-                else
-                    fare = (distanceInKm * 30);
-
+                fare = new SevenSeaterRide(numberOfPassengers, distanceInKm).calculateFare();
                 break;
         }
 
@@ -62,11 +58,11 @@ public class Trip {
 
         switch (rideType) {
             case "SEDAN":
-                return new SedanRide(numberOfPassengers, distanceInKm).canTakeTrip();
+                return new SedanRide(numberOfPassengers, distanceInKm, timeInMinutes).canTakeTrip();
             case "SEVEN_SEATER":
-                return numberOfPassengers <= 7 && distanceInKm >= 10;
+                return new SevenSeaterRide(numberOfPassengers, distanceInKm).canTakeTrip();
             default:
-                return numberOfPassengers <= 1 && distanceInKm <= 10;
+                return new MotorBikeRide(numberOfPassengers, distanceInKm).canTakeTrip();
         }
     }
 }
@@ -74,13 +70,58 @@ public class Trip {
 class SedanRide {
     private int numberOfPassengers;
     private int distanceInKm;
+    private int timeInMinutes;
 
-    SedanRide(int numberOfPassengers, int distanceInKm) {
+    SedanRide(int numberOfPassengers, int distanceInKm, int timeInMinutes) {
+        this.numberOfPassengers = numberOfPassengers;
+        this.distanceInKm = distanceInKm;
+        this.timeInMinutes = timeInMinutes;
+    }
+
+    boolean canTakeTrip() {
+        return numberOfPassengers <= 4 && distanceInKm <= 25;
+    }
+
+    int calculateFare() {
+        return (50 + distanceInKm * 30 + timeInMinutes * 2);
+    }
+}
+
+class SevenSeaterRide {
+    private int numberOfPassengers;
+    private int distanceInKm;
+
+    SevenSeaterRide(int numberOfPassengers, int distanceInKm) {
+        this.numberOfPassengers = numberOfPassengers;
+        this.distanceInKm = distanceInKm;
+    }
+
+    boolean canTakeTrip() {
+        return numberOfPassengers <= 7 && distanceInKm >= 10;
+    }
+
+    int calculateFare() {
+        if (distanceInKm < 10)
+            return 300;
+        else
+            return distanceInKm * 30;
+    }
+}
+
+class MotorBikeRide {
+    private int numberOfPassengers;
+    private int distanceInKm;
+
+    MotorBikeRide(int numberOfPassengers, int distanceInKm) {
         this.numberOfPassengers = numberOfPassengers;
         this.distanceInKm = distanceInKm;
     }
 
     boolean canTakeTrip(){
-        return numberOfPassengers <= 4 && distanceInKm <= 25;
+        return numberOfPassengers <= 1 && distanceInKm <= 10;
+    }
+
+    int calculateFare(){
+        return Math.max(25, distanceInKm * 20);
     }
 }
