@@ -1,7 +1,6 @@
 package _00_mohayemin.ridesharing;
 
 public class Trip {
-    private String rideType;
     private int distanceInKm;
     private int timeInMinutes;
     private int numberOfPassengers;
@@ -11,11 +10,10 @@ public class Trip {
                 int distanceInKm,
                 int timeInMinutes,
                 int numberOfPassengers) {
-        this.rideType = rideType;
         this.distanceInKm = distanceInKm;
         this.timeInMinutes = timeInMinutes;
         this.numberOfPassengers = numberOfPassengers;
-        ride = getRide();
+        ride = getRide(rideType);
     }
 
     public void requestTrip() {
@@ -43,7 +41,7 @@ public class Trip {
         return ride.canTakeTrip();
     }
 
-    private Ride getRide() {
+    private Ride getRide(String rideType) {
         Ride ride;
         if (rideType == "MOTOR_BIKE") {
             ride = new MotorBikeRide(numberOfPassengers, distanceInKm);
