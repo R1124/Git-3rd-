@@ -17,13 +17,16 @@ public class Trip {
     }
 
     public void requestTrip() {
+        Ride ride;
         if (rideType == "MOTOR_BIKE") {
-            System.out.println(new MotorBikeRide(numberOfPassengers, distanceInKm).getRideRequestMessage());
+            ride = new MotorBikeRide(numberOfPassengers, distanceInKm);
         } else if (rideType == "SEVEN_SEATER") {
-            System.out.println(new SevenSeaterRide(numberOfPassengers, distanceInKm).getRideRequestMessage());
+            ride = new SevenSeaterRide(numberOfPassengers, distanceInKm);
         } else {
-            System.out.println(new SedanRide(numberOfPassengers, distanceInKm, timeInMinutes).getRideRequestMessage());
+            ride = new SedanRide(numberOfPassengers, distanceInKm, timeInMinutes);
         }
+
+        System.out.println(ride.getRideRequestMessage());
 
         if (canTakeTrip()) {
             System.out.println(distanceInKm + " KM");
