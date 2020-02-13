@@ -1,6 +1,6 @@
 package _00_mohayemin.ridesharing;
 
-public class SevenSeaterRide {
+public class SevenSeaterRide implements Ride {
     private int numberOfPassengers;
     private int distanceInKm;
 
@@ -9,18 +9,18 @@ public class SevenSeaterRide {
         this.distanceInKm = distanceInKm;
     }
 
-    boolean canTakeTrip() {
+    public boolean canTakeTrip() {
         return numberOfPassengers <= 7 && distanceInKm >= 10;
     }
 
-    int calculateFare() {
+    public int calculateFare() {
         if (distanceInKm < 10)
             return 300;
         else
             return distanceInKm * 30;
     }
 
-    String getRideRequestMessage(){
+    public String getRideRequestMessage(){
         return "== Ride with Friends and Family in Seven-Seater ==";
     }
 }

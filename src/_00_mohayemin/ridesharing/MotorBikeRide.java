@@ -1,6 +1,6 @@
 package _00_mohayemin.ridesharing;
 
-public class MotorBikeRide {
+public class MotorBikeRide implements Ride {
     private int numberOfPassengers;
     private int distanceInKm;
 
@@ -9,15 +9,16 @@ public class MotorBikeRide {
         this.distanceInKm = distanceInKm;
     }
 
-    boolean canTakeTrip(){
+    public boolean canTakeTrip(){
         return numberOfPassengers <= 1 && distanceInKm <= 10;
     }
 
-    int calculateFare(){
+    public int calculateFare(){
         return Math.max(25, distanceInKm * 20);
     }
 
-    String getRideRequestMessage(){
+    public String getRideRequestMessage(){
         return "== Ride Swift in Bike ==";
     }
 }
+

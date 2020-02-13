@@ -1,6 +1,6 @@
 package _00_mohayemin.ridesharing;
 
-public class SedanRide {
+public class SedanRide implements Ride {
     private int numberOfPassengers;
     private int distanceInKm;
     private int timeInMinutes;
@@ -11,15 +11,15 @@ public class SedanRide {
         this.timeInMinutes = timeInMinutes;
     }
 
-    boolean canTakeTrip() {
+    public boolean canTakeTrip() {
         return numberOfPassengers <= 4 && distanceInKm <= 25;
     }
 
-    int calculateFare() {
+    public int calculateFare() {
         return (50 + distanceInKm * 30 + timeInMinutes * 2);
     }
 
-    String getRideRequestMessage(){
+    public String getRideRequestMessage(){
         return "== Comfortable Sedan Ride ==";
     }
 }
