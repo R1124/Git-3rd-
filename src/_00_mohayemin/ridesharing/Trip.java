@@ -5,6 +5,7 @@ public class Trip {
     private int distanceInKm;
     private int timeInMinutes;
     private int numberOfPassengers;
+    Ride ride;
 
     public Trip(String rideType,
                 int distanceInKm,
@@ -14,11 +15,10 @@ public class Trip {
         this.distanceInKm = distanceInKm;
         this.timeInMinutes = timeInMinutes;
         this.numberOfPassengers = numberOfPassengers;
+        ride = getRide();
     }
 
     public void requestTrip() {
-        Ride ride = getRide();
-
         System.out.println(ride.getRideRequestMessage());
 
         if (canTakeTrip()) {
@@ -31,7 +31,6 @@ public class Trip {
     }
 
     public int perHeadFare() {
-        Ride ride = getRide();
         int fare = ride.calculateFare();
         fare /= numberOfPassengers;
         return fare - (fare % 5);
@@ -41,7 +40,6 @@ public class Trip {
         if (numberOfPassengers < 1)
             return false;
 
-        Ride ride = getRide();
         return ride.canTakeTrip();
     }
 
