@@ -17,14 +17,7 @@ public class Trip {
     }
 
     public void requestTrip() {
-        Ride ride;
-        if (rideType == "MOTOR_BIKE") {
-            ride = new MotorBikeRide(numberOfPassengers, distanceInKm);
-        } else if (rideType == "SEVEN_SEATER") {
-            ride = new SevenSeaterRide(numberOfPassengers, distanceInKm);
-        } else {
-            ride = new SedanRide(numberOfPassengers, distanceInKm, timeInMinutes);
-        }
+        Ride ride = getRide();
 
         System.out.println(ride.getRideRequestMessage());
 
@@ -38,19 +31,8 @@ public class Trip {
     }
 
     public int perHeadFare() {
-        int fare = -1;
-        switch (rideType) {
-            case "SEDAN":
-                fare = new SedanRide(numberOfPassengers, distanceInKm, timeInMinutes).calculateFare();
-                break;
-            case "MOTOR_BIKE":
-                fare = new MotorBikeRide(numberOfPassengers, distanceInKm).calculateFare();
-                break;
-            default:
-                fare = new SevenSeaterRide(numberOfPassengers, distanceInKm).calculateFare();
-                break;
-        }
-
+        Ride ride = getRide();
+        int fare = ride.calculateFare();
         fare /= numberOfPassengers;
         return fare - (fare % 5);
     }
@@ -59,14 +41,20 @@ public class Trip {
         if (numberOfPassengers < 1)
             return false;
 
-        switch (rideType) {
-            case "SEDAN":
-                return new SedanRide(numberOfPassengers, distanceInKm, timeInMinutes).canTakeTrip();
-            case "SEVEN_SEATER":
-                return new SevenSeaterRide(numberOfPassengers, distanceInKm).canTakeTrip();
-            default:
-                return new MotorBikeRide(numberOfPassengers, distanceInKm).canTakeTrip();
+        Ride ride = getRide();
+        return ride.canTakeTrip();
+    }
+
+    private Ride getRide() {
+        Ride ride;
+        if (rideType == "MOTOR_BIKE") {
+            ride = new MotorBikeRide(numberOfPassengers, distanceInKm);
+        } else if (rideType == "SEVEN_SEATER") {
+            ride = new SevenSeaterRide(numberOfPassengers, distanceInKm);
+        } else {
+            ride = new SedanRide(numberOfPassengers, distanceInKm, timeInMinutes);
         }
+        return ride;
     }
 }
 
