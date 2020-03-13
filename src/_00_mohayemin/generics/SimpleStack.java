@@ -1,6 +1,6 @@
 package _00_mohayemin.generics;
 
-public class SimpleStack {
+public class SimpleStack<TItem> {
     private Object[] container;
     private int topIndex;
 
@@ -8,11 +8,11 @@ public class SimpleStack {
         container = new Object[size];
     }
 
-    public void push(Object item) {
+    public void push(TItem item) {
         container[++topIndex] = item;
     }
 
-    public Object pop() {
-        return container[topIndex--];
+    public TItem pop() {
+        return (TItem)container[topIndex--];
     }
 }
