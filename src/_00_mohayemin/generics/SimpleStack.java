@@ -1,18 +1,18 @@
 package _00_mohayemin.generics;
 
 public class SimpleStack {
-    private int[] container;
+    private Object[] container;
     private int topIndex;
 
     public SimpleStack(int size) {
-        container = new int[size];
+        container = new Object[size];
     }
 
-    public void push(int item) {
+    public void push(Object item) {
         container[++topIndex] = item;
     }
 
-    public int pop() {
+    public Object pop() {
         return container[topIndex--];
     }
 }
