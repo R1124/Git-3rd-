@@ -28,4 +28,12 @@ public class SimpleStackTest {
         //String item = (String) stack.pop();
         //Assertions.assertEquals("ALPHA", item.toUpperCase());
     }
+
+    @Test
+    public void genericFuncTest()
+    {
+        GenericFunction g = new GenericFunction();
+        String i= g.genericTest("SWE '18");
+        Assertions.assertEquals("SWE '18", i);
+    }
 }
